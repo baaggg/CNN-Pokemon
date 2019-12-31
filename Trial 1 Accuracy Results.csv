@@ -1,9 +1,9 @@
-Filename,Bulbsaur,Charmander,Squirtle,Prediction
-bulb1,58.657,1.4097338,39.933266,Bulbsaur
-bulb2,72.62667,1.8502417,25.52309,Bulbsaur
-bulb3,59.81003,1.7350849,38.45488,Bulbsaur
-bulb4,54.713352,2.8367991,42.44985,Bulbsaur
-bulb5,83.22897,2.7546964,14.016334,Bulbsaur
+Filename,Bulbasaur,Charmander,Squirtle,Prediction
+bulb1,58.657,1.4097338,39.933266,Bulbasaur
+bulb2,72.62667,1.8502417,25.52309,Bulbasaur
+bulb3,59.81003,1.7350849,38.45488,Bulbasaur
+bulb4,54.713352,2.8367991,42.44985,Bulbasaur
+bulb5,83.22897,2.7546964,14.016334,Bulbasaur
 char1,0.0011441348,99.99849,0.00036504286,Charmander
 char2,0.018027687,99.95974,0.022234146,Charmander
 char3,0.07580448,99.83655,0.08764936,Charmander

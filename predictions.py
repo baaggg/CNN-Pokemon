@@ -27,7 +27,7 @@ model = tf.keras.models.load_model(model_dir)
 predictions = model.predict(test_data)
 predictions = predictions * 100
 
-p_df = pd.DataFrame(predictions, columns=['Bulbsaur', 'Charmander', 'Squirtle'])
+p_df = pd.DataFrame(predictions, columns=['Bulbasaur', 'Charmander', 'Squirtle'])
 choice = p_df.idxmax(axis=1)
 
 p_df['Prediction'] = choice

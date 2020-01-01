@@ -11,39 +11,116 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D, Dense, Flatten
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.callbacks import ModelCheckpoint
 
+#####################################################################
 
 ##### Pulls pokemon images from directory and puts their image
 ##### arrays into variable 'X'. 'y' is the name of the pokemon
 ##### image that is called in the for loop as 'p'.
 ##### Bulbsaur=0, Charmander=1, Squirtle=2
-def load_test_data(path):
-    count = 0
-    for p in os.listdir(path):
-        img = cv2.imread(os.path.join(path,p))
-        X.append(img)
+def load_test_data():
+    X = []
+    y = []
+    bulb_train = ['resized2/bulbasaur/', 'flipped2/bulbasaur/']
+    charm_train = ['resized2/charmander/', 'flipped2/charmander/']
+    squirt_train = ['resized2/squirtle/', 'flipped2/squirtle/']
 
-        if count < 86:
+    for path in bulb_train:
+        for p in os.listdir(path):
+            img = cv2.imread(os.path.join(path, p))
+            X.append(img)
             y.append(0)
-        elif count >= 86 and count < 205:
+    for path in charm_train:
+        for p in os.listdir(path):
+            img = cv2.imread(os.path.join(path, p))
+            X.append(img)
             y.append(1)
-        else:
+    for path in squirt_train:
+        for p in os.listdir(path):
+            img = cv2.imread(os.path.join(path, p))
+            X.append(img)
             y.append(2)
-        count += 1
+
     return X, y
+
+##### Resize all images to 70x70 and save them
+##### to the 'resized' folder
+def resize_images():
+    b_path = 'pokemon/bulbasaur/'
+    c_path = 'pokemon/charmander/'
+    s_path = 'pokemon/squirtle/'
+
+    b_dest = 'resized2/bulbasaur/'
+    c_dest = 'resized2/charmander/'
+    s_dest = 'resized2/squirtle/'
+
+    for p in os.listdir(b_path):
+        path_and_fname = b_path + p
+        dest_and_fname = b_dest + p
+        f_path = os.path.join(b_path,p)
+        img = cv2.imread(f_path)
+        small = cv2.resize(img, dsize=(70,70))
+        cv2.imwrite(dest_and_fname, small)
+    for p in os.listdir(c_path):
+        path_and_fname = c_path + p
+        dest_and_fname = c_dest + p
+        f_path = os.path.join(c_path,p)
+        img = cv2.imread(f_path)
+        small = cv2.resize(img, dsize=(70,70))
+        cv2.imwrite(dest_and_fname, small)
+    for p in os.listdir(s_path):
+        path_and_fname = s_path + p
+        dest_and_fname = s_dest + p
+        f_path = os.path.join(s_path,p)
+        img = cv2.imread(f_path)
+        small = cv2.resize(img, dsize=(70,70))
+        cv2.imwrite(dest_and_fname, small)
+    print('Images were resized.')
+
+def flip_images():
+    b_src = 'resized2/bulbasaur/'
+    c_src = 'resized2/charmander/'
+    s_src = 'resized2/squirtle/'
+
+    b_dst = 'flipped2/bulbasaur/'
+    c_dst = 'flipped2/charmander/'
+    s_dst = 'flipped2/squirtle/'
+
+    for file in os.listdir(b_src):
+        dest_fname = b_dst + file
+        f_path = os.path.join(b_src, file)
+        img = cv2.imread(f_path)
+        flipped = cv2.flip(img, 1)
+        cv2.imwrite(dest_fname, flipped)
+    for file in os.listdir(c_src):
+        dest_fname = c_dst + file
+        f_path = os.path.join(c_src, file)
+        img = cv2.imread(f_path)
+        flipped = cv2.flip(img, 1)
+        cv2.imwrite(dest_fname, flipped)
+    for file in os.listdir(s_src):
+        dest_fname = s_dst + file
+        f_path = os.path.join(s_src, file)
+        img = cv2.imread(f_path)
+        flipped = cv2.flip(img, 1)
+        cv2.imwrite(dest_fname, flipped)
+    print('Images were flipped.')
 
 def create_model():
     in_shape = (70, 70, 3)
     model = Sequential()
-    model.add( Conv2D(32, (3,3), activation='relu', input_shape=in_shape) )
-    model.add( Conv2D(64, (3,3), activation='relu') )
-    model.add( Conv2D(128, (3,3), activation='relu') )
+
+    model.add( Conv2D(16, (3,3), activation='relu', padding='same', input_shape=in_shape) )
+    model.add( Conv2D(32, (3,3), activation='relu', padding='same') )
+    model.add( Conv2D(64, (3,3), activation='relu', padding='same') )
+    model.add( Conv2D(128, (3,3), activation='relu', padding='same') )
 
     model.add( MaxPooling2D((2,2)) )
-    model.add( Dropout(0.25) )
+    model.add( Dropout(0.5) )
     model.add( Flatten() )
 
     model.add( Dense(128, activation='relu') )
     model.add( Dense(64, activation='relu') )
+    model.add( Dense(32, activation='relu') )
     model.add( Dense(3, activation='softmax') )
 
     model.compile(optimizer='adam',
@@ -52,36 +129,24 @@ def create_model():
                   metrics=['accuracy'])
     return model
 
-##### Resize all images to 70x70 and save them
-##### to the 'resized' folder
-PATH = 'C:/Users/brand/Desktop/Python/CNN-Pokemon/pokemon/'
-destination = 'C:/Users/brand/Desktop/Python/CNN-Pokemon/resized/'
-if os.listdir(PATH) == 0:
-    print('Resized is empty')
-    for p in os.listdir(PATH):
-        path_and_fname = PATH + p
-        dest_and_fname = destination + p
-        f_path = os.path.join(PATH,p)
-        img = cv2.imread(f_path)
-        small = cv2.resize(img, dsize=(70,70))
-        cv2.imwrite(dest_and_fname, small)
-else:
-    print('Images have already been resized')
+#####################################################################
 
+##### Uncomment to resize or flip images as needed
+# resize_images()
+# flip_images()
 
-X = []
-y = []
-resized_path = 'C:/Users/brand/Desktop/Python/CNN-Pokemon/resized/'
-X, y = load_test_data(resized_path)
+X, y = load_test_data()
 X = np.array(X).reshape(-1, 70, 70, 3)
 y = np.array(y)
 y = to_categorical(y, num_classes=3)
 X = X / 255.0
 
 model = create_model()
-directory = 'C:/Users/brand/Desktop/Python/CNN-Pokemon/model/'
+
+directory = 'conv-models/model3/'
 checkpoint = ModelCheckpoint(directory, save_best_only=True, verbose=1,
                              save_weights_only=False, save_freq='epoch')
+
 model.fit(X, y, epochs=10, batch_size=32, validation_split=0.1, callbacks=[checkpoint])
 
 model.save(directory)

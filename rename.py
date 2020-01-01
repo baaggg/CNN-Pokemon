@@ -1,13 +1,13 @@
 import os
 import time
 
-path = "C:/Users/brand/Desktop/Python/CNN-Pokemon/test-images/squirtle/"
+path = "C:/Users/brand/Desktop/Python/CNN-Pokemon/pokemon/bulbasaur/"
 
 start_time = time.time()
 i = 1
 for filename in os.listdir(path):
     type = filename.split('.')[1]
-    dest = 'squirt' + str(i) + '.' + type
+    dest = 'bulb' + str(i) + '.' + type
     source = path + filename
     dest = path + dest
 

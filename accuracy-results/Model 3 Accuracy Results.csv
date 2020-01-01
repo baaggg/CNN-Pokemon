@@ -1,0 +1,16 @@
+Filename,Bulbsaur,Charmander,Squirtle,Prediction
+bulb1,37.62125,0.347782,62.03097,Squirtle
+bulb2,99.99307,2e-06,0.006928,Bulbsaur
+bulb3,99.99883,1e-06,0.001173,Bulbsaur
+bulb4,99.90403,2.7e-05,0.095945,Bulbsaur
+bulb5,99.99988,1e-05,0.000107,Bulbsaur
+char1,0.0,100.0,0.0,Charmander
+char2,0.0,100.0,0.0,Charmander
+char3,0.0,100.0,0.0,Charmander
+char4,0.0,100.0,0.0,Charmander
+char5,0.000195,99.9983,0.001508,Charmander
+squirt1,0.00154,0.011315,99.98715,Squirtle
+squirt2,0.003065,0.001389,99.995544,Squirtle
+squirt3,0.001495,0.012912,99.985596,Squirtle
+squirt4,3.3e-05,0.00049,99.99947,Squirtle
+squirt5,0.001624,1.667212,98.33116,Squirtle

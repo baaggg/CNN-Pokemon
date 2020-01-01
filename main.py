@@ -20,9 +20,9 @@ from tensorflow.keras.callbacks import ModelCheckpoint
 def load_test_data():
     X = []
     y = []
-    bulb_train = ['resized2/bulbasaur/', 'flipped2/bulbasaur/']
-    charm_train = ['resized2/charmander/', 'flipped2/charmander/']
-    squirt_train = ['resized2/squirtle/', 'flipped2/squirtle/']
+    bulb_train = ['resized/bulbasaur/', 'flipped/bulbasaur/']
+    charm_train = ['resized/charmander/', 'flipped/charmander/']
+    squirt_train = ['resized/squirtle/', 'flipped/squirtle/']
 
     for path in bulb_train:
         for p in os.listdir(path):
@@ -49,9 +49,9 @@ def resize_images():
     c_path = 'pokemon/charmander/'
     s_path = 'pokemon/squirtle/'
 
-    b_dest = 'resized2/bulbasaur/'
-    c_dest = 'resized2/charmander/'
-    s_dest = 'resized2/squirtle/'
+    b_dest = 'resized/bulbasaur/'
+    c_dest = 'resized/charmander/'
+    s_dest = 'resized/squirtle/'
 
     for p in os.listdir(b_path):
         path_and_fname = b_path + p
@@ -77,13 +77,13 @@ def resize_images():
     print('Images were resized.')
 
 def flip_images():
-    b_src = 'resized2/bulbasaur/'
-    c_src = 'resized2/charmander/'
-    s_src = 'resized2/squirtle/'
+    b_src = 'resized/bulbasaur/'
+    c_src = 'resized/charmander/'
+    s_src = 'resized/squirtle/'
 
-    b_dst = 'flipped2/bulbasaur/'
-    c_dst = 'flipped2/charmander/'
-    s_dst = 'flipped2/squirtle/'
+    b_dst = 'flipped/bulbasaur/'
+    c_dst = 'flipped/charmander/'
+    s_dst = 'flipped/squirtle/'
 
     for file in os.listdir(b_src):
         dest_fname = b_dst + file

@@ -44,6 +44,7 @@ p_df['Prediction'] = choice
 p_df.insert(0, 'Filename', fname, True)
 p_df.set_index('Filename', inplace=True)
 
-# p_df.to_csv('Model 3 Accuracy Results.csv')
+csv_dir = 'accuracy-results/'
+p_df.to_csv(csv_dir + 'Model 14 Accuracy Results.csv')
 
 print(p_df)

@@ -1,3 +1,5 @@
 # CNN-Pokemon
 
-Image recognition Neural Net example using pokemon
+Convolutional Neural Network with TensorFlow to recognize Pokemon
+
+Libraries needed: __pip install -r requirements.txt__
